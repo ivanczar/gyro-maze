@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self , starting_pos = (0,0)):
+    def __init__(self , starting_pos = [0,0]):
         self.position = starting_pos
         self.direction = ""
         self.speed = 0
@@ -7,32 +7,51 @@ class Player:
 
     
     def getSpeed(self):
-        pass
+        return self.speed   
         
     def setSpeed(self, newSpeed):
-        pass
+       self.speed = newSpeed 
 
     def getAcceleration(self):
-        pass
+      return self.acceleration 
 
     def setAcceleration(self, newAcceleration):
-        pass
+       self.acceleration = acceleration 
 
     def getDirection(self):
-        pass
+      return self.direction 
 
     def setDirection(self, newDirection):
-        pass
+       self.direction = newDirection 
 
     def getPosition(self):
-        pass
+       return self.position 
 
-    def setPosition(self, newPosition):
-        pass
+    def setPosition(self, x, y):
+       self.position = [x,y] 
 
     def checkForWalls(self):
+        #check for walls and bounds of led matrix (i.e 8)
         pass
 
     def move(self):
-        pass
+        if (getAcceleration > 0):
+            match (getDirection()):
+                case "N":
+                    #checkForWalls
+                    setPosition()
+
+                case "S":
+                    #checkForWalls
+                    setPosition()
+                
+                case "E":
+                    #checkForWalls
+                    setPosition()
+
+                case "W":
+                    #checkForWalls
+                    setPosition()
+
+
 
