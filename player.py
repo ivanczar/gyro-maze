@@ -9,14 +9,12 @@ class Player:
         self.gyro.start()        
         self.position = self.maze.startPos
         self.speed = 1
-        #self.acceleration = 0
 
     def convert2Dpos(self, x, y):
         return x + (y*8)
 
 
     def canMove(self, pos):
-        #check for walls and bounds of led matrix (i.e 8)
         if pos >= 0 and pos <=63:
             return self.maze.maze[pos] == (0,0,0) or self.maze.maze[pos] == (255, 255, 0)
         else:
