@@ -1,57 +1,50 @@
+from gyroscope import Gyroscope
+
+
 class Player:
-    def __init__(self , starting_pos = [0,0]):
-        self.position = starting_pos
-        self.direction = ""
-        self.speed = 0
-        self.acceleration = 0
+    def __init__(self , maze, s):
+        self.maze = maze
+        self.s = s
+        self.gyro = Gyroscope(self.s)
+        self.gyro.start()        
+        self.position = self.maze.startPos
+        self.speed = 1
+        #self.acceleration = 0
 
-    
-    def getSpeed(self):
-        return self.speed   
-        
-    def setSpeed(self, newSpeed):
-       self.speed = newSpeed 
+    def convert2Dpos(self, x, y):
+        return x + (y*8)
 
-    def getAcceleration(self):
-      return self.acceleration 
 
-    def setAcceleration(self, newAcceleration):
-       self.acceleration = acceleration 
-
-    def getDirection(self):
-      return self.direction 
-
-    def setDirection(self, newDirection):
-       self.direction = newDirection 
-
-    def getPosition(self):
-       return self.position 
-
-    def setPosition(self, x, y):
-       self.position = [x,y] 
-
-    def checkForWalls(self):
+    def canMove(self, pos):
         #check for walls and bounds of led matrix (i.e 8)
-        pass
+        if pos >= 0 and pos <=63:
+            return self.maze.maze[pos] == (0,0,0) or self.maze.maze[pos] == (255, 255, 0)
+        else:
+            return False
+
 
     def move(self):
-        if (getAcceleration > 0):
-            match (getDirection()):
-                case "N":
-                    #checkForWalls
-                    setPosition()
+        if (self.speed > 0):
+            print("DIRECTION:", self.gyro.direction)
+            if (self.gyro.direction == "N"):
+                newPos = self.convert2Dpos(self.position[0], self.position[1] - 1)
+                if self.canMove(newPos):
+                    self.position = (self.position[0], self.position[1] - 1)
 
-                case "S":
-                    #checkForWalls
-                    setPosition()
-                
-                case "E":
-                    #checkForWalls
-                    setPosition()
+            elif (self.gyro.direction == "S"):
+                newPos = self.convert2Dpos(self.position[0], self.position[1] + 1)
+                if self.canMove(newPos):
+                    self.position = (self.position[0], self.position[1] + 1)
 
-                case "W":
-                    #checkForWalls
-                    setPosition()
+            elif (self.gyro.direction == "E"):
+                newPos = self.convert2Dpos(self.position[0] + 1, self.position[1])
+                if self.canMove(newPos):
+                    self.position = (self.position[0] + 1, self.position[1])
+
+            else:
+                newPos = self.convert2Dpos(self.position[0] - 1, self.position[1])
+                if self.canMove(newPos):
+                    self.position = (self.position[0] - 1, self.position[1])
 
 
 
