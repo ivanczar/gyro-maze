@@ -45,8 +45,10 @@ class Game:
             self.logger.logCSV(self.timer.lap() , self.player.position[0],self.player.position[1], self.player.gyro.direction,  self.player.gyro.pitch, self.player.gyro.roll)
 
         self.finishTime = self.timer.stop()
+        self.logger.saveLocal(self.maze.endPos)
         # LOG HERE
         print("YOU WIN in ", self.finishTime)
+        return
         
 if __name__ == '__main__':
     game = Game()

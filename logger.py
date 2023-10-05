@@ -10,4 +10,8 @@ class Logger():
     def logCSV(self,time, posx,posy,dir, pitch, roll):
         logger = CSVLogger( time, posx,posy,dir, pitch, roll)
         logger.start()
+    
+    def saveLocal(self, endPos):
+        saver = SQLiteLogger(endPos)
+        saver.start()
         
