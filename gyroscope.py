@@ -1,9 +1,12 @@
 import threading
+
+THRESH = 15
 class Gyroscope(threading.Thread):
+
     def __init__(self , sensehat):
         threading.Thread.__init__(self)
         self.s = sensehat
-        self.direction = "N"
+        self.direction = None
     
     def run(self):
         while True:
@@ -11,13 +14,13 @@ class Gyroscope(threading.Thread):
             vertical = o["roll"]
             horizontal = o["pitch"]
 
-            if vertical >= 10.0 and vertical <= 180.0:
+            if vertical >= (0 + THRESH) and vertical <= 180.0:
                 self.direction = "S"
-            elif vertical <= 350 and vertical >= 180.0:
+            elif vertical <= (360 - THRESH) and vertical >= 180.0:
                 self.direction = "N"
-            elif horizontal >= 10.0 and horizontal <=90.0:
+            elif horizontal >= (0 + THRESH) and horizontal <=90.0:
                 self.direction = "W"
-            elif horizontal <= 350.0 and horizontal >=276.0:
+            elif horizontal <= (360 - THRESH) and horizontal >=276.0:
                 self.direction = "E"
 
 
