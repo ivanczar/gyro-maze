@@ -28,26 +28,22 @@ class Player:
                 newPos = self.convert2Dpos(self.position[0], self.position[1] - 1)
                 if self.canMove(newPos):
                     self.position = (self.position[0], self.position[1] - 1)
-                self.gyro.direction = None
 
             elif (self.gyro.direction == "S"):
                 newPos = self.convert2Dpos(self.position[0], self.position[1] + 1)
                 if self.canMove(newPos):
                     self.position = (self.position[0], self.position[1] + 1)
-                self.gyro.direction = None
 
 
             elif (self.gyro.direction == "E"):
                 newPos = self.convert2Dpos(self.position[0] + 1, self.position[1])
                 if self.canMove(newPos):
                     self.position = (self.position[0] + 1, self.position[1])
-                self.gyro.direction = None
 
             elif (self.gyro.direction == "W"):
                 newPos = self.convert2Dpos(self.position[0] - 1, self.position[1])
                 if self.canMove(newPos):
                     self.position = (self.position[0] - 1, self.position[1])
-                self.gyro.direction = None
 
 
 
