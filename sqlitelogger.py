@@ -21,6 +21,8 @@ class SQLiteLogger(threading.Thread):
 
         with open('movement.csv', newline='') as f:
             data_reader = reader(f, delimiter=',')
+            print("STARTED WRITE TO CSV")
+
             for row in data_reader:
                 print(row)
                 pos = row[1] + ',' + row[2]
@@ -30,7 +32,8 @@ class SQLiteLogger(threading.Thread):
                 if int(row[1]) == self.endPos[0] and int(row[2]) == self.endPos[1]:
                     endTime = float(row[0])
                     break
-            print("here")
+            print("FINISHED WRITE TO CSV")
+
 
         # get current bes time form maze table
         # comare and do logic
