@@ -11,7 +11,7 @@ class Logger():
         logger = CSVLogger( time, posx,posy,dir, pitch, roll)
         logger.start()
     
-    def saveLocal(self, endPos):
-        saver = SQLiteLogger(endPos)
+    def saveLocal(self, endPos, mazeID):
+        saver = SQLiteLogger(endPos, mazeID)
         saver.start()
         

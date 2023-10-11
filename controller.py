@@ -2,6 +2,7 @@ from game import Game
 from sense_hat import SenseHat
 from joystick import Joystick
 from gyroscope import Gyroscope
+from reader import Reader
 
 class Controller:
     def __init__(self):
@@ -12,6 +13,8 @@ class Controller:
         self.gyroscope.start()  
         self.game = Game(self.s, self.gyroscope)
         self.game.start()
+        self.reader = Reader()
+
         self.handleJoystick()
 
     def handleJoystick(self):
@@ -25,7 +28,11 @@ class Controller:
                     print("reseeting player")
                     self.resetPlayer()
                     self.joystick.joyDir = None
-
+                if self.joystick.joyDir == "down":
+                    print("displaying best time")
+                    bestTime = self.reader.readLocal(self.game.maze.mazeID)
+                    self.game.drawBestTime(bestTime)
+                    self.joystick.joyDir = None
                     
 
     def generateNewMaze(self):

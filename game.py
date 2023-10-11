@@ -17,18 +17,23 @@ class Game(threading.Thread):
         self.logger = Logger()
         self.isPlaying = False
         self.hasFinished = False
-
-        
-        
+        self.isPaused = False
 
     def isWin(self):
         return self.player.position == self.maze.endPos
 
-    def drawLED(self):
-        self.s.set_pixels(self.maze.maze)
-        self.s.set_pixel(self.player.position[0], self.player.position[1], (255, 0, 0))
-        sleep(0.5)
-        self.player.move()
+    def drawGame(self):
+        if not self.isPaused:
+            self.s.set_pixels(self.maze.maze)
+            self.s.set_pixel(self.player.position[0], self.player.position[1], (255, 0, 0))
+            sleep(0.5)
+            self.player.move()
+
+    def drawBestTime(self, time):
+        self.isPaused = True
+        message = f"Local best: {time}"
+        self.s.show_message(message, 0.1)
+        self.isPaused = False
        
     def reset(self):
         self.player.position = self.maze.startPos
@@ -42,7 +47,7 @@ class Game(threading.Thread):
 
         while self.isPlaying:
             self.isPlaying = not self.isWin()
-            self.drawLED()
+            self.drawGame()
             self.logger.logCSV(self.timer.lap() , self.player.position[0],self.player.position[1], self.player.gyro.direction,  self.player.gyro.pitch, self.player.gyro.roll)
             self.hasFinished = self.isWin()
 
@@ -50,6 +55,6 @@ class Game(threading.Thread):
             finishTime = self.timer.stop()
             print("YOU WIN in ", finishTime)
             
-            self.logger.saveLocal(self.maze.endPos)
+            self.logger.saveLocal(self.maze.endPos, self.maze.mazeID)
         return
         
