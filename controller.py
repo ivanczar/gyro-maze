@@ -31,7 +31,12 @@ class Controller:
                 if self.joystick.joyDir == "down":
                     print("displaying best time")
                     bestTime = self.reader.readLocal(self.game.maze.mazeID)
-                    self.game.drawBestTime(bestTime)
+                    self.game.drawBestTime("Local", bestTime)
+                    self.joystick.joyDir = None
+                if self.joystick.joyDir == "up":
+                    print("displaying best remote time")
+                    bestRemoteTime = self.reader.readRemote(self.game.maze.mazeID)
+                    self.game.drawBestTime("Remote", bestRemoteTime)
                     self.joystick.joyDir = None
                     
 

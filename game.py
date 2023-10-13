@@ -29,9 +29,10 @@ class Game(threading.Thread):
             sleep(0.5)
             self.player.move()
 
-    def drawBestTime(self, time):
+    def drawBestTime(self, type, time):
         self.isPaused = True
-        message = f"Local best: {time}"
+        print(type + " best: " + time)
+        message = type + " best: " + time
         self.s.show_message(message, 0.1)
         self.isPaused = False
        

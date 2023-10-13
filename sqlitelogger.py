@@ -2,6 +2,7 @@ import threading
 from csv import reader
 import sqlite3
 import os
+from remotelogger import RemoteLogger
 
 class SQLiteLogger(threading.Thread):
     def __init__(self, endPos, mazeID):
@@ -44,6 +45,8 @@ class SQLiteLogger(threading.Thread):
         if endTime is not None:
             c.execute("INSERT INTO gametimes(time, maze_id) VALUES(?, ?)", (endTime, self.mazeID))
             conn.commit()
+            saver = RemoteLogger(self.mazeID, endTime)
+            saver.start()
 
         os.remove('movement.csv')
                 
