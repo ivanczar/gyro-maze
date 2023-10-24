@@ -1,4 +1,5 @@
 import threading
+from time import sleep
 class Joystick(threading.Thread):
     def __init__(self,sense):
         threading.Thread.__init__(self)
@@ -11,6 +12,7 @@ class Joystick(threading.Thread):
             for event in self.s.stick.get_events():
                 if event.action == "pressed":
                     self.joyDir = event.direction
+                    #sleep(0.5)
                     print("DIR: ", self.joyDir)
                 else:
                     self.joyDir = None

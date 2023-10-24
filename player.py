@@ -1,12 +1,11 @@
-from gyroscope import Gyroscope
+
 
 
 class Player:
-    def __init__(self , maze, s):
+    def __init__(self , maze, gyro):
         self.maze = maze
-        self.s = s
-        self.gyro = Gyroscope(self.s)
-        self.gyro.start()        
+        self.gyro = gyro
+              
         self.position = self.maze.startPos
         self.speed = 1
 
@@ -23,7 +22,7 @@ class Player:
 
     def move(self):
         if (self.speed > 0):
-            print("DIRECTION:", self.gyro.direction)
+            #print("DIRECTION:", self.gyro.direction)
             if (self.gyro.direction == "N"):
                 newPos = self.convert2Dpos(self.position[0], self.position[1] - 1)
                 if self.canMove(newPos):
